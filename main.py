@@ -1,4 +1,4 @@
-from PIL import Image, ImageOps
+from PIL import Image, ImageOps, ImageEnhance
 img = None
 
 print("hello")
@@ -42,11 +42,28 @@ while True:
                 img.show()
             case "rotate":
                 degrees = input("How many degrees do you want to rotate it to? > ")
+                print(degrees)
                 degree = int(degrees)
                 filename = img.filename
                 img = img.rotate(degree)
                 img.filename = filename
-            
+            case "enhance":
+                filename = img.filename
+                img.filename = filename
+                qs = input("What would you like to change BRIGHTNESS or CONTRAST? > ")
+                if qs.upper() == "B":
+                    bright = input("How much would you want to change the brightness? > ")
+                    bri = int(bright)
+                    enhancer = ImageEnhance.Brightness(img)
+                    img = enhancer.enchance(bri)
+                else:
+                    contrast = input("How much would you want to change the brightness? > ")
+                    con = int(bright)
+                    img = img.enchancer(con)
+            case "rename":
+                newname = input("What would you like to change the name to? > ")
+                # img.save(newname + ".jpg")
+                img.filename = "asdf.jpg"
     except Exception as e:
         print(e)
             
