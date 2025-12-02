@@ -1,4 +1,5 @@
 from PIL import Image, ImageOps, ImageEnhance
+import os
 img = None
 
 print("hello")
@@ -49,21 +50,33 @@ while True:
                 img.filename = filename
             case "enhance":
                 filename = img.filename
-                img.filename = filename
+                
                 qs = input("What would you like to change BRIGHTNESS or CONTRAST? > ")
-                if qs.upper() == "B":
+                if qs[0].upper() == "B":
                     bright = input("How much would you want to change the brightness? > ")
-                    bri = int(bright)
+                    bri = float(bright)
                     enhancer = ImageEnhance.Brightness(img)
-                    img = enhancer.enchance(bri)
+                    img = enhancer.enhance(bri)
+                    img.filename = filename
                 else:
-                    contrast = input("How much would you want to change the brightness? > ")
-                    con = int(bright)
-                    img = img.enchancer(con)
+                    filename = img.filename
+                    contrast = input("How much would you want the image to contrast? > ")
+                    con = float(contrast)
+                    enhancer = ImageEnhance.Contrast(img)
+                    img = enhancer.enhance(con)
+                    img.filename = filename
             case "rename":
                 newname = input("What would you like to change the name to? > ")
-                # img.save(newname + ".jpg")
-                img.filename = "asdf.jpg"
+                #img.save(newname + ".jpg")
+                os.rename(img.filename, newname + ".jpg")
+            case "crop":
+                filename = img.filename
+                cropp = input("Please enter the left,upper,right,lower pixels you want to crop.> ")
+                thing = cropp.split(',')
+                other = [int(s) for s in thing]
+                pl = tuple(other)
+                img = img.crop(pl)
+                img.filename = filename
     except Exception as e:
         print(e)
             
