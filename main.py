@@ -1,4 +1,4 @@
-from PIL import Image, ImageOps, ImageEnhance
+from PIL import Image, ImageOps, ImageEnhance, ImageColor
 import os
 img = None
 
@@ -51,11 +51,17 @@ while True:
             case "enhance":
                 filename = img.filename
                 
-                qs = input("What would you like to change BRIGHTNESS or CONTRAST? > ")
+                qs = input("What would you like to change BRIGHTNESS, SHARPNESS, or CONTRAST? > ")
                 if qs[0].upper() == "B":
                     bright = input("How much would you want to change the brightness? > ")
                     bri = float(bright)
                     enhancer = ImageEnhance.Brightness(img)
+                    img = enhancer.enhance(bri)
+                    img.filename = filename
+                elif qs[0].upper() == "S":
+                    sharp = input("How much would you want to change the brightness? > ")
+                    sha = float(bright)
+                    enhancer = ImageEnhancer.Sharpness(img)
                     img = enhancer.enhance(bri)
                     img.filename = filename
                 else:
@@ -82,6 +88,29 @@ while True:
                 better = input("Please input what you would like to convert the picture to. (RGB,L,P,1) > ")
                 img = img.convert(better)
                 img.filename = filename
+            case "Flip":
+                qst = input("How would you like to flip it? L/R or T/B > ")
+                if qst[0].upper() == "L":
+                    filename = img.filename
+                    img = img.transpose(Image.FLIP_LEFT_RIGHT)
+                    img.filename = filename 
+                else:
+                    filename = img.filename
+                    img = img.transpose(Image.FLIP_TOP_BOTTOM)
+                    img.filename = filename 
+            case "mode":
+                thing = img.mode
+                print(thing)
+                qstt = input("Would you also like to getcolor? > ")
+                if qstt[0].upper() == "Y":
+                    #filename = img.filename
+                    newqs = input("What color do you want to get? > ")
+                    thingg = newqs
+                    im3 = ImageColor.getcolor(newqs, thing)
+                    print(im3)
+                    #img.filename = filename
+                else:
+                    continue
     except Exception as e:
         print(e)
             
