@@ -77,6 +77,11 @@ while True:
                 pl = tuple(other)
                 img = img.crop(pl)
                 img.filename = filename
+            case "convert":
+                filename = img.filename
+                better = input("Please input what you would like to convert the picture to. (RGB,L,P,1) > ")
+                img = img.convert(better)
+                img.filename = filename
     except Exception as e:
         print(e)
             
