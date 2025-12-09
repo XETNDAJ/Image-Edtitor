@@ -103,14 +103,19 @@ while True:
                 print(thing)
                 qstt = input("Would you also like to getcolor? > ")
                 if qstt[0].upper() == "Y":
-                    #filename = img.filename
+                    filename = img.filename
                     newqs = input("What color do you want to get? > ")
                     thingg = newqs
                     im3 = ImageColor.getcolor(newqs, thing)
                     print(im3)
-                    #img.filename = filename
+                    img.filename = filename
                 else:
                     continue
+            case "invert":
+                filename = img.filename
+                img = ImageOps.invert(img)
+                img.filename = filename
+            
     except Exception as e:
         print(e)
             
