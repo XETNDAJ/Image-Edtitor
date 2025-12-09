@@ -115,7 +115,16 @@ while True:
                 filename = img.filename
                 img = ImageOps.invert(img)
                 img.filename = filename
-            
+            case "list":
+                filename = img.filename
+                px = img.load()
+                lastcolor = -1
+                for x in range(225):
+                    for y in range(225):
+                        if px[x, y] != lastcolor:
+                            lastcolor = px[x, y]
+                            print (px[x, y])
+                    
     except Exception as e:
         print(e)
             
