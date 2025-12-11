@@ -119,12 +119,18 @@ while True:
                 filename = img.filename
                 px = img.load()
                 lastcolor = -1
-                for x in range(225):
-                    for y in range(225):
+                domain = int(input("What is the x size value? > "))
+                ranges = int(input("What is the y size value? > "))
+                for x in range(domain // 2):
+                    for y in range(ranges // 2):
                         if px[x, y] != lastcolor:
                             lastcolor = px[x, y]
-                            print (px[x, y])
-                    
+                            print(px[4, 4])
+                            cord = x, y
+                            print(img.getpixel(cord))
+                        px[x,y] = (0,0,0)
+                print(px)
+                img.filename = filename
     except Exception as e:
         print(e)
             
