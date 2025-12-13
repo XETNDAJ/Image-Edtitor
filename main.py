@@ -118,18 +118,19 @@ while True:
             case "list":
                 filename = img.filename
                 px = img.load()
-                lastcolor = -1
                 domain = int(input("What is the x size value? > "))
                 ranges = int(input("What is the y size value? > "))
-                for x in range(domain // 2):
-                    for y in range(ranges // 2):
-                        if px[x, y] != lastcolor:
-                            lastcolor = px[x, y]
-                            print(px[4, 4])
-                            cord = x, y
-                            print(img.getpixel(cord))
-                        px[x,y] = (0,0,0)
+                red = int(input("What is the RED value: "))
+                green = int(input("What is the GREEN value: "))
+                blue = int(input("What is the BLUE value: "))
+                rgb = (red,green,blue)
+                for x in range(domain):
+                    for y in range(ranges):
+                            if px[x, y] == rgb:
+                                print(img.getpixel((x,y)))
                 print(px)
+            case "coordinate":
+                
                 img.filename = filename
     except Exception as e:
         print(e)
